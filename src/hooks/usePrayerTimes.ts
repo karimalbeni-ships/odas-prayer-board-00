@@ -64,24 +64,24 @@ export function usePrayerTimes() {
       asr: timeToMinutes(prayerTimes.asr),
       maghrib: timeToMinutes(prayerTimes.maghrib),
       isha: timeToMinutes(prayerTimes.isha),
+      midnight: timeToMinutes(prayerTimes.midnight),
     };
 
     // Find current and next prayer
     // Prayer periods: each prayer is "current" until the next one starts
-    // Sunrise is not a prayer time but marks end of Fajr
     let current: PrayerName | null = null;
     let next: PrayerName | null = null;
 
     // Determine which prayer period we're in
     if (now < prayerMinutes.fajr) {
-      // Before Fajr - still in Isha from previous day
-      current = 'isha';
+      // Before Fajr - still in midnight period from previous day
+      current = 'midnight';
       next = 'fajr';
     } else if (now < prayerMinutes.sunrise) {
       current = 'fajr';
-      next = 'dhuhr'; // Next actual prayer after sunrise
+      next = 'dhuhr';
     } else if (now < prayerMinutes.dhuhr) {
-      current = 'sunrise'; // Between sunrise and dhuhr
+      current = 'sunrise';
       next = 'dhuhr';
     } else if (now < prayerMinutes.asr) {
       current = 'dhuhr';
@@ -92,8 +92,11 @@ export function usePrayerTimes() {
     } else if (now < prayerMinutes.isha) {
       current = 'maghrib';
       next = 'isha';
-    } else {
+    } else if (now < prayerMinutes.midnight) {
       current = 'isha';
+      next = 'midnight';
+    } else {
+      current = 'midnight';
       next = 'fajr'; // Next day's Fajr
     }
 
