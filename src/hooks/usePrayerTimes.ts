@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
-import { 
-  getPrayerTimesForDate, 
-  prayerOrder, 
+import {
+  getPrayerTimesForDate,
+  prayerOrder,
   prayerLabels,
-  type DailyPrayerTimes, 
-  type PrayerName 
+  type DailyPrayerTimes,
+  type PrayerName
 } from '@/data/prayerTimes';
 
 interface CurrentPrayerInfo {
@@ -22,11 +22,11 @@ function timeToMinutes(time: string): number {
 
 function formatTimeRemaining(seconds: number): string {
   if (seconds < 0) return '00:00:00';
-  
+
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const secs = seconds % 60;
-  
+
   return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
 
@@ -44,8 +44,11 @@ export function usePrayerTimes() {
 
   // Load prayer times for current date
   useEffect(() => {
-    const times = getPrayerTimesForDate(currentTime);
-    setPrayerTimes(times);
+    const loadTimes = async () => {
+      const times = await getPrayerTimesForDate(currentTime);
+      setPrayerTimes(times);
+    };
+    loadTimes();
   }, [currentTime.toDateString()]);
 
   const currentPrayerInfo = useMemo((): CurrentPrayerInfo => {
@@ -55,7 +58,7 @@ export function usePrayerTimes() {
 
     const now = currentTime.getHours() * 60 + currentTime.getMinutes();
     const nowSeconds = now * 60 + currentTime.getSeconds();
-    
+
     // Get prayer times in minutes - safely handle all fields
     const prayerMinutes: Record<PrayerName, number> = {
       fajr: timeToMinutes(prayerTimes.fajr || '00:00'),
@@ -102,7 +105,7 @@ export function usePrayerTimes() {
 
     // Calculate time remaining until next prayer
     let nextPrayerMinutes = next ? prayerMinutes[next] : 0;
-    
+
     // If next is fajr (tomorrow), add 24 hours
     if (next === 'fajr' && now >= prayerMinutes.isha) {
       nextPrayerMinutes += 24 * 60;
@@ -123,19 +126,19 @@ export function usePrayerTimes() {
   const formattedDate = useMemo(() => {
     const days = ['Sön', 'Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör'];
     const months = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
-    
+
     const dayName = days[currentTime.getDay()];
     const day = currentTime.getDate();
     const month = months[currentTime.getMonth()];
     const year = currentTime.getFullYear();
-    
+
     return `${dayName} ${day} ${month} ${year}`;
   }, [currentTime.toDateString()]);
 
   const formattedTime = useMemo(() => {
-    return currentTime.toLocaleTimeString('sv-SE', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
+    return currentTime.toLocaleTimeString('sv-SE', {
+      hour: '2-digit',
+      minute: '2-digit'
     });
   }, [Math.floor(currentTime.getTime() / 1000)]);
 

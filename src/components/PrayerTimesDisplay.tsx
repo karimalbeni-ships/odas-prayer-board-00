@@ -2,13 +2,13 @@ import { usePrayerTimes } from '@/hooks/usePrayerTimes';
 import type { PrayerName } from '@/data/prayerTimes';
 
 export function PrayerTimesDisplay() {
-  const { 
-    prayerTimes, 
-    currentPrayerInfo, 
-    formattedDate, 
+  const {
+    prayerTimes,
+    currentPrayerInfo,
+    formattedDate,
     formattedTime,
     prayerLabels,
-    prayerOrder 
+    prayerOrder
   } = usePrayerTimes();
 
   if (!prayerTimes) {
@@ -19,18 +19,18 @@ export function PrayerTimesDisplay() {
     );
   }
 
-  const currentLabel = currentPrayerInfo.current 
-    ? prayerLabels[currentPrayerInfo.current] 
+  const currentLabel = currentPrayerInfo.current
+    ? prayerLabels[currentPrayerInfo.current]
     : '';
-  
-  const nextLabel = currentPrayerInfo.next 
-    ? prayerLabels[currentPrayerInfo.next] 
+
+  const nextLabel = currentPrayerInfo.next
+    ? prayerLabels[currentPrayerInfo.next]
     : '';
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 pb-8">
       <div className="w-full max-w-sm space-y-6">
-        
+
         {/* Header */}
         <header className="text-center space-y-2 opacity-0 animate-fade-in" style={{ animationDelay: '0ms' }}>
           <h1 className="text-3xl font-display font-semibold text-gradient-gold flex items-center justify-center gap-3">
@@ -38,12 +38,12 @@ export function PrayerTimesDisplay() {
             Odas bönetavla
           </h1>
           <p className="text-muted-foreground text-sm font-body">
-            {formattedDate} • {formattedTime}
+            {formattedDate}
           </p>
         </header>
 
         {/* Current Prayer Card */}
-        <div 
+        <div
           className="glass-card rounded-2xl p-6 text-center space-y-4 glow-gold opacity-0 animate-fade-in"
           style={{ animationDelay: '100ms' }}
         >
@@ -54,7 +54,7 @@ export function PrayerTimesDisplay() {
               <span className="text-xl">🕌</span>
             </p>
           </div>
-          
+
           <div className="space-y-1">
             <p className="text-muted-foreground text-xs uppercase tracking-wider">Går ut om</p>
             <p className="text-4xl font-body font-light text-primary tracking-wider animate-countdown">
@@ -64,7 +64,7 @@ export function PrayerTimesDisplay() {
         </div>
 
         {/* Next Prayer */}
-        <div 
+        <div
           className="glass-card rounded-xl p-4 flex items-center justify-between opacity-0 animate-fade-in"
           style={{ animationDelay: '200ms' }}
         >
@@ -77,15 +77,15 @@ export function PrayerTimesDisplay() {
         </div>
 
         {/* Prayer Schedule */}
-        <div 
+        <div
           className="glass-card rounded-2xl overflow-hidden opacity-0 animate-fade-in"
           style={{ animationDelay: '300ms' }}
         >
           <div className="divide-y divide-border/50">
-        {prayerOrder.map((prayer, index) => {
+            {prayerOrder.map((prayer, index) => {
               const time = prayerTimes[prayer];
               const isActive = currentPrayerInfo.current === prayer;
-              
+
               return (
                 <div
                   key={prayer}
