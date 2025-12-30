@@ -49,22 +49,22 @@ export function usePrayerTimes() {
   }, [currentTime.toDateString()]);
 
   const currentPrayerInfo = useMemo((): CurrentPrayerInfo => {
-    if (!prayerTimes) {
+    if (!prayerTimes || !prayerTimes.midnight) {
       return { current: null, next: null, nextTime: null, timeRemaining: '00:00:00', secondsRemaining: 0 };
     }
 
     const now = currentTime.getHours() * 60 + currentTime.getMinutes();
     const nowSeconds = now * 60 + currentTime.getSeconds();
     
-    // Get prayer times in minutes
+    // Get prayer times in minutes - safely handle all fields
     const prayerMinutes: Record<PrayerName, number> = {
-      fajr: timeToMinutes(prayerTimes.fajr),
-      sunrise: timeToMinutes(prayerTimes.sunrise),
-      dhuhr: timeToMinutes(prayerTimes.dhuhr),
-      asr: timeToMinutes(prayerTimes.asr),
-      maghrib: timeToMinutes(prayerTimes.maghrib),
-      isha: timeToMinutes(prayerTimes.isha),
-      midnight: timeToMinutes(prayerTimes.midnight),
+      fajr: timeToMinutes(prayerTimes.fajr || '00:00'),
+      sunrise: timeToMinutes(prayerTimes.sunrise || '00:00'),
+      dhuhr: timeToMinutes(prayerTimes.dhuhr || '00:00'),
+      asr: timeToMinutes(prayerTimes.asr || '00:00'),
+      maghrib: timeToMinutes(prayerTimes.maghrib || '00:00'),
+      isha: timeToMinutes(prayerTimes.isha || '00:00'),
+      midnight: timeToMinutes(prayerTimes.midnight || '23:59'),
     };
 
     // Find current and next prayer
