@@ -8,7 +8,9 @@ export function PrayerTimesDisplay() {
     formattedDate,
     formattedTime,
     prayerLabels,
-    prayerOrder
+    prayerOrder,
+    isExactMatch,
+    formattedDisplayedDate
   } = usePrayerTimes();
 
   if (!prayerTimes) {
@@ -30,6 +32,18 @@ export function PrayerTimesDisplay() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 pb-8">
       <div className="w-full max-w-sm space-y-6">
+
+        {/* Outdated Data Warning */}
+        {!isExactMatch && formattedDisplayedDate && (
+          <div className="bg-yellow-500/20 border border-yellow-500/50 rounded-lg p-3 text-center opacity-0 animate-fade-in">
+            <p className="text-yellow-200 text-sm font-medium">
+              ⚠️ Visar just nu bönetider från {formattedDisplayedDate}
+            </p>
+            <p className="text-yellow-200 text-sm font-medium">
+              Meddela Abedoh för att uppdatera bönetiderna.
+            </p>
+          </div>
+        )}
 
         {/* Header */}
         <header className="text-center space-y-2 opacity-0 animate-fade-in" style={{ animationDelay: '0ms' }}>

@@ -33,6 +33,8 @@ function formatTimeRemaining(seconds: number): string {
 export function usePrayerTimes() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [prayerTimes, setPrayerTimes] = useState<DailyPrayerTimes | null>(null);
+  const [isExactMatch, setIsExactMatch] = useState(true);
+  const [displayedDate, setDisplayedDate] = useState<string | null>(null);
 
   // Update current time every second
   useEffect(() => {
@@ -45,8 +47,10 @@ export function usePrayerTimes() {
   // Load prayer times for current date
   useEffect(() => {
     const loadTimes = async () => {
-      const times = await getPrayerTimesForDate(currentTime);
-      setPrayerTimes(times);
+      const result = await getPrayerTimesForDate(currentTime);
+      setPrayerTimes(result.times);
+      setIsExactMatch(result.isExactMatch);
+      setDisplayedDate(result.displayedDate);
     };
     loadTimes();
   }, [currentTime.toDateString()]);
@@ -142,6 +146,16 @@ export function usePrayerTimes() {
     });
   }, [Math.floor(currentTime.getTime() / 1000)]);
 
+  // Format the displayed date for the warning message
+  const formattedDisplayedDate = useMemo(() => {
+    if (!displayedDate) return null;
+    const date = new Date(displayedDate);
+    return date.toLocaleDateString('sv-SE', {
+      day: 'numeric',
+      month: 'long'
+    });
+  }, [displayedDate]);
+
   return {
     prayerTimes,
     currentTime,
@@ -149,6 +163,8 @@ export function usePrayerTimes() {
     formattedDate,
     formattedTime,
     prayerLabels,
-    prayerOrder
+    prayerOrder,
+    isExactMatch,
+    formattedDisplayedDate
   };
 }

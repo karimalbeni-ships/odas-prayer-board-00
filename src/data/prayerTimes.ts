@@ -33,16 +33,43 @@ export async function fetchPrayerData(): Promise<MonthlyPrayerData> {
   return cachedPrayerData!;
 }
 
-export async function getPrayerTimesForDate(date: Date): Promise<DailyPrayerTimes | null> {
+export interface PrayerTimesResult {
+  times: DailyPrayerTimes | null;
+  isExactMatch: boolean;
+  displayedDate: string | null;
+}
+
+export async function getPrayerTimesForDate(date: Date): Promise<PrayerTimesResult> {
   const dateString = date.toISOString().split('T')[0];
+  const targetTime = date.getTime();
 
   try {
     const prayerData = await fetchPrayerData();
-    const dayData = prayerData.days.find(d => d.date === dateString);
-    return dayData || prayerData.days[0] || null;
+
+    const exactMatch = prayerData.days.find(d => d.date === dateString);
+    if (exactMatch) {
+      return { times: exactMatch, isExactMatch: true, displayedDate: exactMatch.date };
+    }
+
+    if (prayerData.days.length === 0) {
+      return { times: null, isExactMatch: false, displayedDate: null };
+    }
+
+    let closestDay = prayerData.days[0];
+    let closestDiff = Math.abs(new Date(closestDay.date).getTime() - targetTime);
+
+    for (const day of prayerData.days) {
+      const diff = Math.abs(new Date(day.date).getTime() - targetTime);
+      if (diff < closestDiff) {
+        closestDiff = diff;
+        closestDay = day;
+      }
+    }
+
+    return { times: closestDay, isExactMatch: false, displayedDate: closestDay.date };
   } catch (error) {
     console.error('Error fetching prayer times:', error);
-    return null;
+    return { times: null, isExactMatch: false, displayedDate: null };
   }
 }
 
