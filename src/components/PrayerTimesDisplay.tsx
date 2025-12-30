@@ -82,10 +82,9 @@ export function PrayerTimesDisplay() {
           style={{ animationDelay: '300ms' }}
         >
           <div className="divide-y divide-border/50">
-            {prayerOrder.map((prayer, index) => {
+        {prayerOrder.map((prayer, index) => {
               const time = prayerTimes[prayer];
               const isActive = currentPrayerInfo.current === prayer;
-              const isNext = currentPrayerInfo.next === prayer;
               
               return (
                 <div
@@ -93,17 +92,13 @@ export function PrayerTimesDisplay() {
                   className={`
                     flex items-center justify-between px-5 py-3.5 transition-colors
                     ${isActive ? 'bg-primary/10' : ''}
-                    ${isNext ? 'bg-secondary/50' : ''}
                   `}
                 >
                   <div className="flex items-center gap-3">
                     {isActive && (
                       <span className="w-2 h-2 rounded-full bg-primary animate-pulse-slow" />
                     )}
-                    {!isActive && isNext && (
-                      <span className="w-2 h-2 rounded-full bg-muted-foreground/50" />
-                    )}
-                    {!isActive && !isNext && (
+                    {!isActive && (
                       <span className="w-2 h-2" />
                     )}
                     <span className={`
