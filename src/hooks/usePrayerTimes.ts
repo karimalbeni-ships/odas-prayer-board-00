@@ -86,7 +86,7 @@ export function usePrayerTimes() {
       next = 'fajr';
     } else if (now < prayerMinutes.sunrise) {
       current = 'fajr';
-      next = 'dhuhr';
+      next = 'sunrise';
     } else if (now < prayerMinutes.dhuhr) {
       current = 'sunrise';
       next = 'dhuhr';
