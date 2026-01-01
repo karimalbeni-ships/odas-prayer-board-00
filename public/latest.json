@@ -10,7 +10,7 @@
             "asr": "12:51",
             "maghrib": "15:01",
             "isha": "17:19",
-            "midnight": "23:35"
+            "midnight": "23:42"
         },
         {
             "date": "2025-12-30",
@@ -20,7 +20,7 @@
             "asr": "12:52",
             "maghrib": "15:03",
             "isha": "17:20",
-            "midnight": "23:35"
+            "midnight": "23:42"
         },
         {
             "date": "2025-12-31",
@@ -30,7 +30,7 @@
             "asr": "12:53",
             "maghrib": "15:04",
             "isha": "17:20",
-            "midnight": "23:35"
+            "midnight": "23:42"
         },
         {
             "date": "2026-01-01",
@@ -40,7 +40,7 @@
             "asr": "12:54",
             "maghrib": "15:05",
             "isha": "17:21",
-            "midnight": null
+            "midnight": "23:42"
         },
         {
             "date": "2026-01-02",
@@ -50,7 +50,7 @@
             "asr": "12:55",
             "maghrib": "15:07",
             "isha": "17:23",
-            "midnight": null
+            "midnight": "23:43"
         },
         {
             "date": "2026-01-03",
@@ -60,7 +60,7 @@
             "asr": "12:57",
             "maghrib": "15:08",
             "isha": "17:24",
-            "midnight": null
+            "midnight": "23:44"
         },
         {
             "date": "2026-01-04",
@@ -70,7 +70,7 @@
             "asr": "12:58",
             "maghrib": "15:10",
             "isha": "17:25",
-            "midnight": null
+            "midnight": "23:44"
         },
         {
             "date": "2026-01-05",
@@ -80,7 +80,7 @@
             "asr": "12:59",
             "maghrib": "15:11",
             "isha": "17:26",
-            "midnight": null
+            "midnight": "23:44"
         },
         {
             "date": "2026-01-06",
@@ -90,7 +90,7 @@
             "asr": "13:00",
             "maghrib": "15:13",
             "isha": "17:27",
-            "midnight": null
+            "midnight": "23:45"
         },
         {
             "date": "2026-01-07",
@@ -100,7 +100,7 @@
             "asr": "13:01",
             "maghrib": "15:14",
             "isha": "17:29",
-            "midnight": null
+            "midnight": "23:46"
         },
         {
             "date": "2026-01-08",
@@ -110,7 +110,7 @@
             "asr": "13:03",
             "maghrib": "15:16",
             "isha": "17:30",
-            "midnight": null
+            "midnight": "23:46"
         },
         {
             "date": "2026-01-09",
@@ -120,7 +120,7 @@
             "asr": "13:04",
             "maghrib": "15:18",
             "isha": "17:31",
-            "midnight": null
+            "midnight": "23:46"
         },
         {
             "date": "2026-01-10",
@@ -130,7 +130,7 @@
             "asr": "13:05",
             "maghrib": "15:20",
             "isha": "17:33",
-            "midnight": null
+            "midnight": "23:47"
         },
         {
             "date": "2026-01-11",
@@ -140,7 +140,7 @@
             "asr": "13:07",
             "maghrib": "15:22",
             "isha": "17:34",
-            "midnight": null
+            "midnight": "23:47"
         },
         {
             "date": "2026-01-12",
@@ -150,7 +150,7 @@
             "asr": "13:08",
             "maghrib": "15:24",
             "isha": "17:36",
-            "midnight": null
+            "midnight": "23:47"
         },
         {
             "date": "2026-01-13",
@@ -160,7 +160,7 @@
             "asr": "13:10",
             "maghrib": "15:26",
             "isha": "17:37",
-            "midnight": null
+            "midnight": "23:48"
         },
         {
             "date": "2026-01-14",
@@ -170,7 +170,7 @@
             "asr": "13:11",
             "maghrib": "15:28",
             "isha": "17:39",
-            "midnight": null
+            "midnight": "23:48"
         },
         {
             "date": "2026-01-15",
@@ -180,7 +180,7 @@
             "asr": "13:13",
             "maghrib": "15:30",
             "isha": "17:40",
-            "midnight": null
+            "midnight": "23:48"
         },
         {
             "date": "2026-01-16",
@@ -190,7 +190,7 @@
             "asr": "13:15",
             "maghrib": "15:32",
             "isha": "17:42",
-            "midnight": null
+            "midnight": "23:49"
         },
         {
             "date": "2026-01-17",
@@ -200,7 +200,7 @@
             "asr": "13:16",
             "maghrib": "15:35",
             "isha": "17:44",
-            "midnight": null
+            "midnight": "23:49"
         },
         {
             "date": "2026-01-18",
@@ -210,7 +210,7 @@
             "asr": "13:18",
             "maghrib": "15:37",
             "isha": "17:45",
-            "midnight": null
+            "midnight": "23:49"
         },
         {
             "date": "2026-01-19",
@@ -220,7 +220,7 @@
             "asr": "13:19",
             "maghrib": "15:39",
             "isha": "17:47",
-            "midnight": null
+            "midnight": "23:50"
         },
         {
             "date": "2026-01-20",
@@ -230,7 +230,7 @@
             "asr": "13:21",
             "maghrib": "15:41",
             "isha": "17:49",
-            "midnight": null
+            "midnight": "23:50"
         },
         {
             "date": "2026-01-21",
@@ -240,7 +240,7 @@
             "asr": "13:23",
             "maghrib": "15:44",
             "isha": "17:51",
-            "midnight": null
+            "midnight": "23:50"
         },
         {
             "date": "2026-01-22",
@@ -250,7 +250,7 @@
             "asr": "13:25",
             "maghrib": "15:46",
             "isha": "17:52",
-            "midnight": null
+            "midnight": "23:50"
         },
         {
             "date": "2026-01-23",
@@ -260,7 +260,7 @@
             "asr": "13:26",
             "maghrib": "15:49",
             "isha": "17:54",
-            "midnight": null
+            "midnight": "23:51"
         },
         {
             "date": "2026-01-24",
@@ -270,7 +270,7 @@
             "asr": "13:28",
             "maghrib": "15:51",
             "isha": "17:56",
-            "midnight": null
+            "midnight": "23:51"
         },
         {
             "date": "2026-01-25",
@@ -280,7 +280,7 @@
             "asr": "13:30",
             "maghrib": "15:53",
             "isha": "17:58",
-            "midnight": null
+            "midnight": "23:51"
         },
         {
             "date": "2026-01-26",
@@ -290,7 +290,7 @@
             "asr": "13:32",
             "maghrib": "15:56",
             "isha": "18:00",
-            "midnight": null
+            "midnight": "23:51"
         },
         {
             "date": "2026-01-27",
@@ -300,7 +300,7 @@
             "asr": "13:34",
             "maghrib": "15:58",
             "isha": "18:02",
-            "midnight": null
+            "midnight": "23:52"
         },
         {
             "date": "2026-01-28",
@@ -310,7 +310,7 @@
             "asr": "13:35",
             "maghrib": "16:01",
             "isha": "18:04",
-            "midnight": null
+            "midnight": "23:52"
         },
         {
             "date": "2026-01-29",
@@ -320,7 +320,7 @@
             "asr": "13:37",
             "maghrib": "16:03",
             "isha": "18:06",
-            "midnight": null
+            "midnight": "23:52"
         },
         {
             "date": "2026-01-30",
@@ -330,7 +330,7 @@
             "asr": "13:39",
             "maghrib": "16:06",
             "isha": "18:08",
-            "midnight": null
+            "midnight": "23:52"
         },
         {
             "date": "2026-01-31",
@@ -340,7 +340,7 @@
             "asr": "13:41",
             "maghrib": "16:08",
             "isha": "18:10",
-            "midnight": null
+            "midnight": "23:53"
         }
     ]
 }
