@@ -2,7 +2,7 @@
   "range": "2026-02-27_to_2026-03-19",
   "location": "Stockholm (Husby)",
   "days": [
-    { "date": "2026-02-27", "fajr": "04:36", "sunrise": "06:45", "dhuhr": "12:06", "asr": "14:31", "maghrib": "17:17", "isha": "19:10", "midnight": "23:51" },
+    { "date": "2026-02-27", "fajr": "04:36", "sunrise": "06:45", "dhuhr": "12:06", "asr": "14:31", "maghrib": "17:17", "isha": "19:10", "midnight": "23:49" },
     { "date": "2026-02-28", "fajr": "04:33", "sunrise": "06:42", "dhuhr": "12:05", "asr": "14:33", "maghrib": "17:19", "isha": "19:12", "midnight": "23:51" },
     { "date": "2026-03-01", "fajr": "04:30", "sunrise": "06:39", "dhuhr": "12:05", "asr": "14:35", "maghrib": "17:22", "isha": "19:15", "midnight": "23:51" },
     { "date": "2026-03-02", "fajr": "04:27", "sunrise": "06:36", "dhuhr": "12:05", "asr": "14:37", "maghrib": "17:24", "isha": "19:17", "midnight": "23:50" },
