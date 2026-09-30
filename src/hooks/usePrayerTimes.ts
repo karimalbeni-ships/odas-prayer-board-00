@@ -35,6 +35,7 @@ export function usePrayerTimes() {
   const [prayerTimes, setPrayerTimes] = useState<DailyPrayerTimes | null>(null);
   const [isExactMatch, setIsExactMatch] = useState(true);
   const [displayedDate, setDisplayedDate] = useState<string | null>(null);
+  const [prevMidnight, setPrevMidnight] = useState<string | null>(null);
 
   // Update current time every second
   useEffect(() => {
@@ -51,6 +52,12 @@ export function usePrayerTimes() {
       setPrayerTimes(result.times);
       setIsExactMatch(result.isExactMatch);
       setDisplayedDate(result.displayedDate);
+
+      // Yesterday's "halva natten" may fall after 00:00 today
+      const yesterday = new Date(currentTime);
+      yesterday.setDate(yesterday.getDate() - 1);
+      const prev = await getPrayerTimesForDate(yesterday);
+      setPrevMidnight(prev.isExactMatch ? prev.times?.midnight ?? null : null);
     };
     loadTimes();
   }, [currentTime.toDateString()]);
@@ -79,11 +86,27 @@ export function usePrayerTimes() {
     let current: PrayerName | null = null;
     let next: PrayerName | null = null;
 
+    // "Halva natten" can fall after 00:00 (e.g. 00:31). Treat such times as
+    // belonging to the night that started the previous evening.
+    const midnightWraps = prayerMinutes.midnight < prayerMinutes.maghrib;
+    const prevMidnightMinutes = timeToMinutes(prevMidnight || prayerTimes.midnight);
+    const prevMidnightWraps = prevMidnightMinutes < prayerMinutes.maghrib;
+
+    let nextPrayerMinutes = 0;
+    let nextTime: string | null = null;
+
     // Determine which prayer period we're in
     if (now < prayerMinutes.fajr) {
-      // Before Fajr - still in midnight period from previous day
-      current = 'midnight';
-      next = 'fajr';
+      if (prevMidnightWraps && now < prevMidnightMinutes) {
+        // After 00:00 but before yesterday's "halva natten" - still Isha
+        current = 'isha';
+        next = 'midnight';
+        nextPrayerMinutes = prevMidnightMinutes;
+        nextTime = prevMidnight || prayerTimes.midnight;
+      } else {
+        current = 'midnight';
+        next = 'fajr';
+      }
     } else if (now < prayerMinutes.sunrise) {
       current = 'fajr';
       next = 'sunrise';
@@ -99,20 +122,22 @@ export function usePrayerTimes() {
     } else if (now < prayerMinutes.isha) {
       current = 'maghrib';
       next = 'isha';
-    } else if (now < prayerMinutes.midnight) {
+    } else if (midnightWraps || now < prayerMinutes.midnight) {
       current = 'isha';
       next = 'midnight';
+      nextPrayerMinutes = prayerMinutes.midnight + (midnightWraps ? 24 * 60 : 0);
     } else {
       current = 'midnight';
       next = 'fajr'; // Next day's Fajr
+      nextPrayerMinutes = prayerMinutes.fajr + 24 * 60;
     }
 
     // Calculate time remaining until next prayer
-    let nextPrayerMinutes = next ? prayerMinutes[next] : 0;
-
-    // If next is fajr (tomorrow), add 24 hours
-    if (next === 'fajr' && now >= prayerMinutes.isha) {
-      nextPrayerMinutes += 24 * 60;
+    if (!nextPrayerMinutes && next) {
+      nextPrayerMinutes = prayerMinutes[next];
+    }
+    if (!nextTime && next) {
+      nextTime = prayerTimes[next];
     }
 
     const secondsRemaining = Math.max(0, nextPrayerMinutes * 60 - nowSeconds);
@@ -121,11 +146,11 @@ export function usePrayerTimes() {
     return {
       current,
       next,
-      nextTime: next ? prayerTimes[next] : null,
+      nextTime,
       timeRemaining,
       secondsRemaining
     };
-  }, [prayerTimes, currentTime]);
+  }, [prayerTimes, prevMidnight, currentTime]);
 
   const formattedDate = useMemo(() => {
     const days = ['Sön', 'Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör'];

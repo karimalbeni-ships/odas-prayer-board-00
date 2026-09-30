@@ -40,7 +40,8 @@ export interface PrayerTimesResult {
 }
 
 export async function getPrayerTimesForDate(date: Date): Promise<PrayerTimesResult> {
-  const dateString = date.toISOString().split('T')[0];
+  // Use local date (toISOString is UTC and gives yesterday's date after local midnight)
+  const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
   const targetTime = date.getTime();
 
   try {
